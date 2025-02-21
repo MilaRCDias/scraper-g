@@ -28,6 +28,8 @@ jobs:
 
       - name: Run Scraper
         env:
+          WEBSITE1: ${{ secrets.WEBSITE1 }}
+          WEBSITE2: ${{ secrets.WEBSITE2 }}
           EMAIL: ${{ secrets.EMAIL }}
           PASSWORD: ${{ secrets.PASSWORD }}
         run: node index.js
