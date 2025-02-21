@@ -7,7 +7,7 @@ const websites = [
   process.env.WEBSITE2 
 ];
 
-const searchTerms = ["april", "mai", "juni", "märz"];
+const searchTerms = ["april", "mai", "juni"];
 
 async function scrapeWebsite(url) {
   const browser = await chromium.launch({ headless: true });
@@ -47,8 +47,11 @@ async function scrapeAll() {
     }
   }
 
-  sendEmail(results);
-  
+  if (results.length > 0) {
+    sendEmail(results);
+  } else {
+    console.log("🚫 No matches found on any website.");
+  }
 }
 
 function sendEmail(results) {
@@ -61,16 +64,11 @@ function sendEmail(results) {
   });
 
   let messageBody = "The following courses were found:\n\n";
-  if (results.length > 0) {
-    results.forEach(result => {
-      messageBody += `📌 **Website:** ${result.url}\n`;
-      messageBody += `✅ **Matches:** ${result.matches.join(", ")}\n\n`;
-    });
-  } else {
-    messageBody += "🚫 No matches found on any website.";
-    console.log("🚫 No matches found on any website.");
-  }
- 
+
+  results.forEach(result => {
+    messageBody += `📌 **Website:** ${result.url}\n`;
+    messageBody += `✅ **Matches:** ${result.matches.join(", ")}\n\n`;
+  });
 
   let mailOptions = {
     from: process.env.EMAIL,
