@@ -1,13 +1,13 @@
 {
   "name": "scraper-g",
   "version": "1.0.0",
-  "description": "",
+  "description": "Page scraper",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "MRCD",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.7",
