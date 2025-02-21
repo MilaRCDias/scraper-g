@@ -47,11 +47,8 @@ async function scrapeAll() {
     }
   }
 
-  if (results.length > 0) {
-    sendEmail(results);
-  } else {
-    console.log("🚫 No matches found on any website.");
-  }
+  sendEmail(results);
+  
 }
 
 function sendEmail(results) {
@@ -64,11 +61,16 @@ function sendEmail(results) {
   });
 
   let messageBody = "The following courses were found:\n\n";
-
-  results.forEach(result => {
-    messageBody += `📌 **Website:** ${result.url}\n`;
-    messageBody += `✅ **Matches:** ${result.matches.join(", ")}\n\n`;
-  });
+  if (results.length > 0) {
+    results.forEach(result => {
+      messageBody += `📌 **Website:** ${result.url}\n`;
+      messageBody += `✅ **Matches:** ${result.matches.join(", ")}\n\n`;
+    });
+  } else {
+    messageBody += "🚫 No matches found on any website.";
+    console.log("🚫 No matches found on any website.");
+  }
+ 
 
   let mailOptions = {
     from: process.env.EMAIL,
@@ -85,5 +87,7 @@ function sendEmail(results) {
     }
   });
 }
+
+
 
 scrapeAll();
