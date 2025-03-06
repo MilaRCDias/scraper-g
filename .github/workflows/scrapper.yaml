@@ -1,34 +1,33 @@
-name: Scrape Courses
+# name: Scrape Courses
 
-on:
-  schedule:
-    - cron: "0 */6 * * *"  
+# on:
+#   schedule:
+#     - cron: "0 */6 * * *"  
 
+#   workflow_dispatch:  #
+# jobs:
+#   scrape:
+#     runs-on: ubuntu-latest
 
-  workflow_dispatch:  #
-jobs:
-  scrape:
-    runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v3
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: '18'
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+#       - name: Install dependencies
+#         run: npm install
 
-      - name: Install dependencies
-        run: npm install
+#       - name: Install Playwright Browsers
+#         run: npx playwright install --with-deps
 
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-
-      - name: Run Scraper
-        env:
-          WEBSITE1: ${{ secrets.WEBSITE1 }}
-          WEBSITE2: ${{ secrets.WEBSITE2 }}
-          EMAIL: ${{ secrets.EMAIL }}
-          PASSWORD: ${{ secrets.PASSWORD }}
-        run: node index.js
+#       - name: Run Scraper
+#         env:
+#           WEBSITE1: ${{ secrets.WEBSITE1 }}
+#           WEBSITE2: ${{ secrets.WEBSITE2 }}
+#           EMAIL: ${{ secrets.EMAIL }}
+#           PASSWORD: ${{ secrets.PASSWORD }}
+#         run: node index.js
